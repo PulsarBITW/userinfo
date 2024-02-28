@@ -1,20 +1,31 @@
 import { useEffect, useState } from "react";
 import Service from "../service";
 
-export const useUserList = () => {
+export const useUserList = (url = "https://randomuser.me/api/?results=15") => {
   const [userList, setUserList] = useState({});
+  const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    let flag = true;
+    let flag = true; // Профилактика от гонки запросов
+    setLoading(true);
 
     const getUser = async () => {
-      const a = await Service.getUsers();
-      const b = await a.json();
-      if (flag) setUserList(b);
+      try {
+        const a = await Service.getUsers(url);
+        const b = await a.json();
+        if (flag) setUserList(b);
+      } catch (err) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
     };
     getUser();
     return () => {
       flag = false;
     };
   }, []);
+
+  return [userList, isLoading, error];
 };
