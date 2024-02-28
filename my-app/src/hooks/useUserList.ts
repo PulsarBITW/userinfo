@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import Service from "../service";
 
-export const useUserList = (url = "https://randomuser.me/api/?results=15") => {
+export const useUserList = (
+  setFilterUsers: any,
+  url = "https://randomuser.me/api/?results=15"
+) => {
   const [userList, setUserList] = useState<Record<string, any> | Array<any>>(
-    {}
+    []
   );
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -16,7 +19,10 @@ export const useUserList = (url = "https://randomuser.me/api/?results=15") => {
       try {
         const a = await Service.getUsers(url);
         const b = await a.json();
-        if (flag) setUserList(b);
+        if (flag) {
+          setUserList(b.results);
+          setFilterUsers(b.results);
+        }
       } catch (err) {
         setError(true);
       } finally {

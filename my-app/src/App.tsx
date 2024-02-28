@@ -6,18 +6,33 @@ import SearchInput from "./components/SearchInput/SearchInput";
 import useFilters from "./hooks/useFilters";
 
 function App() {
-  const [userList, isLoading] = useUserList();
+  const [filterUsers, setFilterUsers] = useState([]);
+  const [userList, isLoading] = useUserList(setFilterUsers);
   const [searchParams, setSearchParams] = useState("");
-  console.log("allUsers", userList);
-  const reset = () => setSearchParams("");
+  useFilters(searchParams, userList, setFilterUsers); // синхронизация значения инпута с отображаемым контентом
+  const reset = () => setSearchParams(""); // поменять
 
-  const filterUsers = useFilters(searchParams, userList);
-
+  console.log("userList", userList, "filterList", filterUsers);
   return (
     <div className="App">
-      <SearchInput value={searchParams} setValue={setSearchParams} />
+      <SearchInput
+        searchParams={searchParams}
+        setSearchParams={setSearchParams}
+      />
       <button onClick={reset}>{"reset"}</button>
-      {isLoading ? <h1>{"Loading..."}</h1> : <div>{"Already"}</div>}
+      {isLoading ? (
+        <h1>{"Loading..."}</h1>
+      ) : (
+        <div>
+          {filterUsers.map((el: any, i) => {
+            return (
+              <div key={el.login.uuid}>
+                <h1>{i + 1 + ". " + el.name.first + " " + el.name.last}</h1>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
