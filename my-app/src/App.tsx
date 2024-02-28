@@ -15,8 +15,8 @@ const App = () => {
   const [searchParams, setSearchParams] = useState<string>("");
 
   useFilters(searchParams, userList, setFilterUsers); // синхронизация значения инпута с отображаемым контентом
-
-  console.log("userList", userList, "filterList", filterUsers);
+  console.log("render");
+  // console.log("userList", userList, "filterList", filterUsers);
   return (
     <div className="App">
       <main>

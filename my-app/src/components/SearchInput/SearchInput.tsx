@@ -16,7 +16,12 @@ const SerchInput: React.FC<SearchInputProps> = ({ setSearchParams }) => {
   };
 
   return (
-    <input className={classes.searchInput} ref={ref} onChange={onChange} />
+    <input
+      className={classes.searchInput}
+      ref={ref}
+      onChange={onChange}
+      placeholder="something"
+    />
   );
 };
 
