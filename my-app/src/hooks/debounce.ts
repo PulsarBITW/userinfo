@@ -8,7 +8,7 @@ export default function useDebounce(callback: any, timer: number) {
       if (timerId.current) {
         clearTimeout(timerId.current);
       }
-      timerId.current = setTimeout(() => callback(...args), 1000);
+      timerId.current = setTimeout(() => callback(...args), timer);
     },
     [callback]
   );
