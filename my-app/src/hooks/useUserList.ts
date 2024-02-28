@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Service from "../service";
 
-export const useUserList = (
+const useUserList = (
   setFilterUsers: any,
   url = "https://randomuser.me/api/?results=15"
 ) => {
@@ -37,3 +37,5 @@ export const useUserList = (
 
   return [userList, isLoading, error];
 };
+
+export default useUserList;

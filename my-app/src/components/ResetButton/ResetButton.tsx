@@ -1,0 +1,17 @@
+import React from "react";
+import classes from "./ResetButton.module.css";
+
+interface buttonProps {
+  children: string;
+  handle: () => void;
+}
+
+const ResetButton: React.FC<buttonProps> = ({ children, handle }) => {
+  return (
+    <button className={classes.btn} onClick={handle}>
+      {children}
+    </button>
+  );
+};
+
+export default ResetButton;
