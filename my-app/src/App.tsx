@@ -8,11 +8,11 @@ import useFilters from "./hooks/useFilters";
 function App() {
   const [userList, isLoading] = useUserList();
   const [searchParams, setSearchParams] = useState("");
-
+  console.log("allUsers", userList);
   const reset = () => setSearchParams("");
 
-  // const filterUsers = useFilters(searchParams);
-  console.log(userList);
+  const filterUsers = useFilters(searchParams, userList);
+
   return (
     <div className="App">
       <SearchInput value={searchParams} setValue={setSearchParams} />

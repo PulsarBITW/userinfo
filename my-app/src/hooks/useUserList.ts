@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import Service from "../service";
 
 export const useUserList = (url = "https://randomuser.me/api/?results=15") => {
-  const [userList, setUserList] = useState({});
+  const [userList, setUserList] = useState<Record<string, any> | Array<any>>(
+    {}
+  );
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
