@@ -9,10 +9,10 @@ interface ImgTdProps {
 const ImgTd: React.FC<ImgTdProps> = ({ thumbnail, pictureLarge }) => {
   const [isActive, setIsActive] = useState(false);
 
-  const handleMouseOver: React.MouseEventHandler<HTMLImageElement> = (e) => {
+  const handleMouseOver: React.MouseEventHandler<HTMLImageElement> = () => {
     setIsActive(true);
   };
-  const handleMouseOut = () => {
+  const handleMouseOut: React.MouseEventHandler<HTMLImageElement> = () => {
     setIsActive(false);
   };
   return (
@@ -23,11 +23,12 @@ const ImgTd: React.FC<ImgTdProps> = ({ thumbnail, pictureLarge }) => {
           src={thumbnail}
           onMouseOver={handleMouseOver}
           onMouseOut={handleMouseOut}
+          alt="user"
         />
         <span
           className={isActive ? classes.tooltipActive : classes.tooltipNone}
         >
-          <img className={classes.large} src={pictureLarge} />
+          <img className={classes.large} src={pictureLarge} alt="user" />
         </span>
       </div>
     </td>

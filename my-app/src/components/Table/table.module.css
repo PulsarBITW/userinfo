@@ -1,4 +1,6 @@
 .table {
+  border: solid 3px orange;
+
   border-collapse: collapse;
 }
 .table td {
@@ -9,5 +11,5 @@
 .table,
 .table th,
 .table td {
-  border: solid 1px grey;
+  border: solid 3px orange;
 }

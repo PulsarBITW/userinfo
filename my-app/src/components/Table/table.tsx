@@ -13,12 +13,24 @@ const Table: React.FC<TableProps> = ({ users }) => {
     <table className={classes.table}>
       <tbody>
         <tr>
-          <td>name</td>
-          <td>picture</td>
-          <td>location</td>
-          <td>email</td>
-          <td>phone</td>
-          <td>registered date</td>
+          <td>
+            <h2>{"name"}</h2>
+          </td>
+          <td>
+            <h2>{"picture"}</h2>
+          </td>
+          <td>
+            <h2>{"location"}</h2>
+          </td>
+          <td>
+            <h2>{"email"}</h2>
+          </td>
+          <td>
+            <h2>{"phone"}</h2>
+          </td>
+          <td>
+            <h2>{"registered date"}</h2>
+          </td>
         </tr>
         {users.map((el: any) => {
           return (
