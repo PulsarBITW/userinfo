@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useRef, RefObject } from "react";
 import classes from "./ImgTd.module.css";
 
 interface ImgTdProps {
@@ -7,14 +7,16 @@ interface ImgTdProps {
 }
 
 const ImgTd: React.FC<ImgTdProps> = ({ thumbnail, pictureLarge }) => {
-  const [isActive, setIsActive] = useState(false);
+  const ref = useRef<HTMLSpanElement>(null);
 
   const handleMouseOver: React.MouseEventHandler<HTMLImageElement> = () => {
-    setIsActive(true);
+    if (ref.current) ref.current.className = classes.tooltipActive;
   };
+
   const handleMouseOut: React.MouseEventHandler<HTMLImageElement> = () => {
-    setIsActive(false);
+    if (ref.current) ref.current.className = classes.tooltipNone;
   };
+
   return (
     <td className={classes.tooltipContainer}>
       <div className={classes.wrappImg}>
@@ -25,9 +27,7 @@ const ImgTd: React.FC<ImgTdProps> = ({ thumbnail, pictureLarge }) => {
           onMouseOut={handleMouseOut}
           alt="user-thumbnail"
         />
-        <span
-          className={isActive ? classes.tooltipActive : classes.tooltipNone}
-        >
+        <span ref={ref} className={classes.tooltipNone}>
           <img className={classes.large} src={pictureLarge} alt="user-large" />
         </span>
       </div>
