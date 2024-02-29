@@ -1,24 +1,34 @@
 import { useEffect } from "react";
 import { userListType } from "../Types/types";
+import { useState } from "react";
 
-// interface useFiltersProps {
-//   searchParams: string;
-//   userList: userListType;
-//   setFilterUsers: React.Dispatch<React.SetStateAction<string>>;
-// }
-
-const useFilters = (
-  searchParams: string,
-  userList: any,
-  setFilterUsers: any
-) => {
+const useFilters = (searchParams: string, userList: any) => {
+  const [filterUsers, setFilterUsers] = useState<userListType[]>([]);
+  const [notFoundUsers, setNotFoundUsers] = useState<boolean>(false); //
   useEffect(() => {
-    const filterArray = userList.filter((el: any) => {
-      const str = el.name.first.toLowerCase() + el.name.last.toLowerCase(); //
-      return str.startsWith(searchParams.toLowerCase());
-    });
-    setFilterUsers(filterArray);
-  }, [searchParams]);
+    console.log("loading");
+
+    // clone userList to filterUsers in first Render and setFilterUsers if searchParams.length equal 0
+    if (searchParams.length === 0) {
+      setFilterUsers(userList);
+      setNotFoundUsers(false);
+    } else {
+      const filterArray = userList.filter((el: any) => {
+        const str = (
+          el.name.first.toLowerCase() + el.name.last.toLowerCase()
+        ).replaceAll(" ", "");
+        return str.startsWith(searchParams.toLowerCase().replaceAll(" ", ""));
+      });
+      // speacial message if we have not user with name equal searchParams
+      if (!filterArray.length) setNotFoundUsers(true);
+      else {
+        setFilterUsers(filterArray);
+        setNotFoundUsers(false);
+      }
+    }
+  }, [searchParams, userList]);
+
+  return [filterUsers, notFoundUsers] as const;
 };
 
 export default useFilters;

@@ -5,7 +5,7 @@
   display: block;
   position: absolute;
   z-index: 1;
-  left: 5em;
+  left: 40px;
   pointer-events: none;
 }
 
@@ -21,8 +21,6 @@
 }
 
 .thumbnail {
-  width: 60%;
-  height: 60%;
   cursor: pointer;
 }
 .large {

@@ -23,12 +23,12 @@ const ImgTd: React.FC<ImgTdProps> = ({ thumbnail, pictureLarge }) => {
           src={thumbnail}
           onMouseOver={handleMouseOver}
           onMouseOut={handleMouseOut}
-          alt="user"
+          alt="user-thumbnail"
         />
         <span
           className={isActive ? classes.tooltipActive : classes.tooltipNone}
         >
-          <img className={classes.large} src={pictureLarge} alt="user" />
+          <img className={classes.large} src={pictureLarge} alt="user-large" />
         </span>
       </div>
     </td>

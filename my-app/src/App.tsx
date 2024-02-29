@@ -2,26 +2,31 @@ import { useState } from "react";
 
 import "./App.css";
 import useUserList from "./hooks/useUserList";
-import SearchInput from "./components/SearchInput/SearchInput";
 import useFilters from "./hooks/useFilters";
 import Table from "./components/Table/table";
-import { userListType } from "./Types/types";
-import ResetButton from "./components/ResetButton/ResetButton";
 import SearchTools from "./components/SearchTools/SearchTools";
+import Spinner from "./components/Spinner/Spinner";
+import NotFound from "./components/NotFound/NotFound";
 
 const App = () => {
-  const [filterUsers, setFilterUsers] = useState<userListType[]>([]);
-  const [userList, isLoading] = useUserList(setFilterUsers);
+  const [userList, isLoading, error] = useUserList();
   const [searchParams, setSearchParams] = useState<string>("");
+  const [filterUsers, notFoundUsers] = useFilters(searchParams, userList);
 
-  useFilters(searchParams, userList, setFilterUsers); // синхронизация значения инпута с отображаемым контентом
-  console.log("render");
-  // console.log("userList", userList, "filterList", filterUsers);
   return (
     <div className="App">
       <main>
         <SearchTools setSearchParams={setSearchParams} />
-        {isLoading ? <h1>{"Loading..."}</h1> : <Table users={filterUsers} />}
+
+        {isLoading ? (
+          <Spinner />
+        ) : error ? (
+          <h1>{"Error - bad request"}</h1>
+        ) : notFoundUsers ? (
+          <NotFound />
+        ) : (
+          <Table users={filterUsers} />
+        )}
       </main>
     </div>
   );

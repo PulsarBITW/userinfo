@@ -1,5 +1,5 @@
 import { useRef, FC, Dispatch, SetStateAction } from "react";
-import useDebounce from "../../hooks/debounce";
+import useDebounce from "../../hooks/useDebounce";
 import classes from "./SearchInput.module.css";
 
 interface SearchInputProps {
@@ -9,7 +9,7 @@ interface SearchInputProps {
 const SerchInput: React.FC<SearchInputProps> = ({ setSearchParams }) => {
   const ref = useRef<HTMLInputElement>(null); // id for input
 
-  const debounce = useDebounce(setSearchParams, 1000);
+  const debounce = useDebounce(setSearchParams, 500);
 
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     debounce(e.target.value);
