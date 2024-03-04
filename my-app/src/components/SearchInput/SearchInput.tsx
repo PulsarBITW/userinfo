@@ -1,4 +1,4 @@
-import { useRef, FC, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, forwardRef } from "react";
 import useDebounce from "../../hooks/useDebounce";
 import classes from "./SearchInput.module.css";
 
@@ -6,23 +6,23 @@ interface SearchInputProps {
   setSearchParams: Dispatch<SetStateAction<string>>;
 }
 
-const SerchInput: React.FC<SearchInputProps> = ({ setSearchParams }) => {
-  const ref = useRef<HTMLInputElement>(null); // id for input
+const SerchInput = forwardRef<HTMLInputElement, SearchInputProps>(
+  ({ setSearchParams }, ref) => {
+    const debounce = useDebounce(setSearchParams, 500);
 
-  const debounce = useDebounce(setSearchParams, 500);
+    const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+      debounce(e.target.value);
+    };
 
-  const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    debounce(e.target.value);
-  };
-
-  return (
-    <input
-      className={classes.searchInput}
-      ref={ref}
-      onChange={onChange}
-      placeholder="something"
-    />
-  );
-};
+    return (
+      <input
+        className={classes.searchInput}
+        ref={ref}
+        onChange={onChange}
+        placeholder="something"
+      />
+    );
+  }
+);
 
 export default SerchInput;

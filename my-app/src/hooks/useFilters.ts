@@ -1,13 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { userListType } from "../Types/types";
-import { useState } from "react";
 
 const useFilters = (searchParams: string, userList: any) => {
   const [filterUsers, setFilterUsers] = useState<userListType[]>([]);
   const [notFoundUsers, setNotFoundUsers] = useState<boolean>(false); //
   useEffect(() => {
-    console.log("loading");
-
     // clone userList to filterUsers in first Render and setFilterUsers if searchParams.length equal 0
     if (searchParams.length === 0) {
       setFilterUsers(userList);

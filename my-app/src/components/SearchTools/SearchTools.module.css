@@ -1,9 +1,8 @@
 .SearchTools {
-  width: 700px;
+  width: 60%;
   height: 40px;
-  margin: auto;
   display: flex;
   align-items: center;
-
+  justify-content: center;
   margin-bottom: 10px;
 }

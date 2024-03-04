@@ -1,12 +1,16 @@
 import { useState } from "react";
 
 import "./App.css";
+
 import useUserList from "./hooks/useUserList";
 import useFilters from "./hooks/useFilters";
 import Table from "./components/Table/table";
 import SearchTools from "./components/SearchTools/SearchTools";
 import Spinner from "./components/Spinner/Spinner";
 import NotFound from "./components/NotFound/NotFound";
+
+// Сделать типизацию
+// Улучшить поиск по строке
 
 const App = () => {
   const [userList, isLoading, error] = useUserList();
@@ -17,7 +21,6 @@ const App = () => {
     <div className="App">
       <main>
         <SearchTools setSearchParams={setSearchParams} />
-
         {isLoading ? (
           <Spinner />
         ) : error ? (

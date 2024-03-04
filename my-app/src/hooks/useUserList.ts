@@ -1,26 +1,34 @@
 import { useEffect, useState } from "react";
-import Service from "../service";
-import { userListType } from "../Types/types";
+import { userListType, userProps } from "../Types/types";
+
+interface responseProps {
+  data: userProps | any[];
+  error: boolean;
+  isLoading: boolean;
+}
 
 const useUserList = (url = "https://randomuser.me/api/?results=15") => {
-  const [userList, setUserList] = useState<userListType[]>([]);
-  const [isLoading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [response, setResponse] = useState<responseProps>({
+    data: [],
+    error: false,
+    isLoading: true,
+  });
 
   useEffect(() => {
     let flag = true; // Профилактика от гонки запросов
-    setLoading(true);
+    setResponse((prev) => ({ ...prev, isLoading: true }));
     const getUser = async () => {
       try {
-        const a = await Service.getUsers(url);
+        const a = await fetch(url);
         const b = await a.json();
+        console.log(b);
         if (flag) {
-          setUserList(b.results);
+          setResponse((prev) => ({ ...prev, data: b.results }));
         }
       } catch (err) {
-        setError(true);
+        setResponse((prev) => ({ ...prev, error: true }));
       } finally {
-        setLoading(false);
+        setResponse((prev) => ({ ...prev, isLoading: false }));
       }
     };
     getUser();
@@ -29,7 +37,7 @@ const useUserList = (url = "https://randomuser.me/api/?results=15") => {
     };
   }, []);
 
-  return [userList, isLoading, error];
+  return [response.data, response.isLoading, response.error];
 };
 
 export default useUserList;

@@ -1,4 +1,4 @@
-import { useState, useRef, RefObject } from "react";
+import { useRef } from "react";
 import classes from "./ImgTd.module.css";
 
 interface ImgTdProps {
