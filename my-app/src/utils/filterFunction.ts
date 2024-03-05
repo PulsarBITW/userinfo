@@ -1,17 +1,13 @@
 import { resultUser } from "../Types/types";
 
-const prepareSearchParams = (searchParams: string) => {
-  return searchParams.toLowerCase().replaceAll(" ", "");
-};
-
-const prepareName = (name: string) => {
-  return name.toLowerCase().replaceAll(" ", "");
+const prepareString = (str: string) => {
+  return str.toLowerCase().replaceAll(" ", "");
 };
 
 const filterFunction = (searchParams: string, item: resultUser) => {
-  const firstName = prepareName(item.name.first);
-  const lastName = prepareName(item.name.last);
-  const searchParamsForСomparison = prepareSearchParams(searchParams);
+  const firstName = prepareString(item.name.first);
+  const lastName = prepareString(item.name.last);
+  const searchParamsForСomparison = prepareString(searchParams);
 
   // filter by name order
   const res1 = (firstName + lastName).startsWith(searchParamsForСomparison);
