@@ -9,7 +9,6 @@ import SearchTools from "./components/SearchTools/SearchTools";
 import Spinner from "./components/Spinner/Spinner";
 import NotFound from "./components/NotFound/NotFound";
 
-// Сделать типизацию
 // Улучшить поиск по строке
 
 // we can use a ReactContext to avoid props drilling in SearchTools->SearchInput, but it only occurs once
