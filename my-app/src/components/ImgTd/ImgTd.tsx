@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, memo } from "react";
 import classes from "./ImgTd.module.css";
 
 interface ImgTdProps {
@@ -6,7 +6,10 @@ interface ImgTdProps {
   pictureLarge: string;
 }
 
-const ImgTd: React.FC<ImgTdProps> = ({ thumbnail, pictureLarge }) => {
+// we use memo to avoid rerenders
+const ImgTd = memo(({ thumbnail, pictureLarge }: ImgTdProps) => {
+  console.log("render imgTd");
+
   const ref = useRef<HTMLSpanElement>(null);
 
   const handleMouseOver: React.MouseEventHandler<HTMLImageElement> = () => {
@@ -33,6 +36,6 @@ const ImgTd: React.FC<ImgTdProps> = ({ thumbnail, pictureLarge }) => {
       </div>
     </td>
   );
-};
+});
 
 export default ImgTd;

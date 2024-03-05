@@ -17,7 +17,7 @@ const SerchInput = forwardRef<HTMLInputElement, SearchInputProps>(
     return (
       <input
         className={classes.searchInput}
-        ref={ref}
+        ref={ref} // react guarantees ref stability between renders so you don’t have to use the memo
         onChange={onChange}
         placeholder="something"
       />

@@ -1,14 +1,18 @@
-import { useRef } from "react";
+import { memo, useRef } from "react";
 import ResetButton from "../ResetButton/ResetButton";
 import SearchInput from "../SearchInput/SearchInput";
 import classes from "./SearchTools.module.css";
 
-const SearchTools = ({ setSearchParams }) => {
-  const ref = useRef(null); // ref for input
+const SearchTools = memo(({ setSearchParams }: any) => {
+  console.log("render searchTools");
+
+  const ref = useRef<HTMLInputElement>(null);
 
   const reset = () => {
-    setSearchParams("");
-    ref.current.value = "";
+    if (ref.current) {
+      setSearchParams("");
+      ref.current.value = "";
+    }
   };
 
   return (
@@ -17,6 +21,6 @@ const SearchTools = ({ setSearchParams }) => {
       <ResetButton handle={reset}>{"Reset"}</ResetButton>
     </div>
   );
-};
+});
 
 export default SearchTools;

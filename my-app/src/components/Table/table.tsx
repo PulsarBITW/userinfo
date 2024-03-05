@@ -1,11 +1,12 @@
 import ImgTd from "../ImgTd/ImgTd";
 import classes from "./table.module.css";
-
+import { memo } from "react";
 interface TableProps {
   users: Array<any>;
 }
 
-const Table: React.FC<TableProps> = ({ users }) => {
+const Table = memo(({ users }: TableProps) => {
+  console.log("render table");
   return (
     <table className={classes.table}>
       <thead>
@@ -55,6 +56,6 @@ const Table: React.FC<TableProps> = ({ users }) => {
       </tbody>
     </table>
   );
-};
+});
 
 export default Table;

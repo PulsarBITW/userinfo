@@ -16,16 +16,3 @@ const useDebounce = (callback: (...args: any[]) => void, timer: number) => {
 };
 
 export default useDebounce;
-
-// or without hooks :
-
-// function decoratorDebounce(callback, delay) {
-//   let timer;
-//   const debounce = () => {
-//     if (timer) clearTimeout(timer);
-//     timer = setTimeout(() => {
-//       callback();
-//     }, delay);
-//   };
-//   return debounce;
-// }

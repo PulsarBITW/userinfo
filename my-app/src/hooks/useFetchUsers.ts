@@ -21,7 +21,7 @@ const useUserList = (url = "https://randomuser.me/api/?results=15") => {
       try {
         const a = await fetch(url);
         const b = await a.json();
-        console.log(b);
+        // console.log(b);
         if (flag) {
           setResponse((prev) => ({ ...prev, data: b.results }));
         }
@@ -35,7 +35,7 @@ const useUserList = (url = "https://randomuser.me/api/?results=15") => {
     return () => {
       flag = false;
     };
-  }, []);
+  }, [url]);
 
   return [response.data, response.isLoading, response.error];
 };
