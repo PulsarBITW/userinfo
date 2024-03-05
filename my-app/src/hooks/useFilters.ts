@@ -1,32 +1,36 @@
 import { useEffect, useState } from "react";
 import { resultUser } from "../Types/types";
+import filterFunction from "../utils/filterFunction";
+
+type filterInfo = {
+  filterUsers: resultUser[];
+  notFoundUsers: boolean;
+};
 
 const useFilters = (searchParams: string, userList: resultUser[]) => {
-  const [filterUsers, setFilterUsers] = useState<resultUser[]>(userList);
-  const [notFoundUsers, setNotFoundUsers] = useState<boolean>(false);
+  const initialState: filterInfo = {
+    filterUsers: userList,
+    notFoundUsers: false,
+  };
+  const [filterInfo, setFilterInfo] = useState<filterInfo>(initialState);
 
+  // clone userList to filterUsers in first Render and setFilterUsers if searchParams.length equal 0
   useEffect(() => {
-    // clone userList to filterUsers in first Render and setFilterUsers if searchParams.length equal 0
-    if (searchParams.length === 0) {
-      setFilterUsers(userList);
-      setNotFoundUsers(false);
-    } else {
-      const filterArray = userList.filter((el: resultUser) => {
-        const str = (
-          el.name.first.toLowerCase() + el.name.last.toLowerCase()
-        ).replaceAll(" ", "");
-        return str.startsWith(searchParams.toLowerCase().replaceAll(" ", ""));
-      });
-      // speacial message if we have not user with name equal searchParams
-      if (!filterArray.length) setNotFoundUsers(true);
+    if (searchParams.length === 0)
+      setFilterInfo({ filterUsers: userList, notFoundUsers: false });
+    else {
+      const filterArray = userList.filter((el: resultUser) =>
+        filterFunction(searchParams, el)
+      );
+      if (!filterArray.length)
+        setFilterInfo((prev) => ({ ...prev, notFoundUsers: true }));
       else {
-        setFilterUsers(filterArray);
-        setNotFoundUsers(false);
+        setFilterInfo({ filterUsers: filterArray, notFoundUsers: false });
       }
     }
   }, [searchParams, userList]);
 
-  return [filterUsers, notFoundUsers] as const;
+  return [filterInfo.filterUsers, filterInfo.notFoundUsers] as const;
 };
 
 export default useFilters;

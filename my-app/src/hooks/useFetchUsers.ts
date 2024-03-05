@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { resultUser, resultRequest, responseProps } from "../Types/types";
 
-const useFetchUsers = (url = "https://randomuser.me/api/?results=15") => {
+const useFetchUsers = (
+  url: string = "https://randomuser.me/api/?results=15"
+) => {
   const [responseState, setResponseState] = useState<responseProps>({
     data: [],
     error: false,
@@ -16,10 +18,8 @@ const useFetchUsers = (url = "https://randomuser.me/api/?results=15") => {
       try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data);
-        if (flag) {
-          setResponseState((prev) => ({ ...prev, data: data.results }));
-        }
+        // console.log(data);
+        if (flag) setResponseState((prev) => ({ ...prev, data: data.results }));
       } catch (err) {
         setResponseState((prev) => ({ ...prev, error: true }));
       } finally {
