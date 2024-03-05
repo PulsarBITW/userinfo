@@ -1,10 +1,10 @@
-import React from "react";
+import { ReactNode } from "react";
 import classes from "./ResetButton.module.css";
 
-interface buttonProps {
-  children: string;
+type buttonProps = {
+  children: ReactNode;
   handle: () => void;
-}
+};
 
 const ResetButton: React.FC<buttonProps> = ({ children, handle }) => {
   return (

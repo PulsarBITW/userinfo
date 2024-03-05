@@ -1,10 +1,24 @@
-export interface userListType {
-  [index: number]: any;
-}
+type nameType = {
+  first: string;
+  last: string;
+  title: string;
+};
 
-export interface userProps {
+type id = {
+  name: string;
+  value: string;
+};
+
+type info = {
+  page: number;
+  results: number;
+  seed: string;
+  version: string;
+};
+// Добить типизацию мб
+export interface resultUser {
   genger: string;
-  name: Record<string, string>;
+  name: nameType;
   location: Record<string, string>;
   email: string;
   login: Record<string, string>;
@@ -14,5 +28,16 @@ export interface userProps {
   registered: Record<string, string>;
   dop: Record<string, string>;
   cell: string;
-  id: Record<string, string>;
+  id: id;
+}
+
+export interface resultRequest {
+  info: info;
+  results: resultUser[];
+}
+
+export interface responseProps {
+  data: resultUser[];
+  error: boolean;
+  isLoading: boolean;
 }

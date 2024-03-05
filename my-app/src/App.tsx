@@ -10,11 +10,12 @@ import Spinner from "./components/Spinner/Spinner";
 import NotFound from "./components/NotFound/NotFound";
 
 // Улучшить поиск по строке
+// типизация useFetchUsers и useDebounce
+// мб добить типы для объекта юзера
 
 // we can use a ReactContext to avoid props drilling in SearchTools->SearchInput, but it only occurs once
 //  we can create a separate component for <main/> to avoid rerenders in App, but App is <main/> in this task
 const App = () => {
-  const [test, setTest] = useState(true);
   const [userList, isLoading, error] = useFetchUsers();
   const [searchParams, setSearchParams] = useState<string>("");
   const [filterUsers, notFoundUsers] = useFilters(searchParams, userList);
@@ -22,7 +23,6 @@ const App = () => {
   return (
     <div className="App">
       <main>
-        <button onClick={() => setTest((prev) => !prev)}>{"render"}</button>
         <SearchTools setSearchParams={setSearchParams} />
         {isLoading ? (
           <Spinner />

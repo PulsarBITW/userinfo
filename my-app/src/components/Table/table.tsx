@@ -1,12 +1,16 @@
 import ImgTd from "../ImgTd/ImgTd";
 import classes from "./table.module.css";
 import { memo } from "react";
-interface TableProps {
-  users: Array<any>;
-}
 
-const Table = memo(({ users }: TableProps) => {
+import { resultUser } from "../../Types/types";
+
+type tableProps = {
+  users: resultUser[];
+};
+
+const Table = memo(({ users }: tableProps) => {
   console.log("render table");
+
   return (
     <table className={classes.table}>
       <thead>
@@ -32,7 +36,7 @@ const Table = memo(({ users }: TableProps) => {
         </tr>
       </thead>
       <tbody>
-        {users.map((el: any) => {
+        {users.map((el: resultUser) => {
           return (
             <tr key={el.login.uuid}>
               <td>{`${el.name.first} ${el.name.last}`}</td>

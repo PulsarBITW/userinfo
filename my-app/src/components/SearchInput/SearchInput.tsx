@@ -2,9 +2,9 @@ import { Dispatch, SetStateAction, forwardRef } from "react";
 import useDebounce from "../../hooks/useDebounce";
 import classes from "./SearchInput.module.css";
 
-interface SearchInputProps {
+type SearchInputProps = {
   setSearchParams: Dispatch<SetStateAction<string>>;
-}
+};
 
 const SerchInput = forwardRef<HTMLInputElement, SearchInputProps>(
   ({ setSearchParams }, ref) => {

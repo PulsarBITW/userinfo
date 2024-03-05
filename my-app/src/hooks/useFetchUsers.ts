@@ -1,34 +1,29 @@
 import { useEffect, useState } from "react";
-import { userListType, userProps } from "../Types/types";
+import { resultUser, resultRequest, responseProps } from "../Types/types";
 
-interface responseProps {
-  data: userProps | any[];
-  error: boolean;
-  isLoading: boolean;
-}
-
-const useUserList = (url = "https://randomuser.me/api/?results=15") => {
-  const [response, setResponse] = useState<responseProps>({
+const useFetchUsers = (url = "https://randomuser.me/api/?results=15") => {
+  const [responseState, setResponseState] = useState<responseProps>({
     data: [],
     error: false,
     isLoading: true,
   });
 
+  // типизирование этой части
   useEffect(() => {
     let flag = true; // Профилактика от гонки запросов
-    setResponse((prev) => ({ ...prev, isLoading: true }));
+    setResponseState((prev) => ({ ...prev, isLoading: true }));
     const getUser = async () => {
       try {
-        const a = await fetch(url);
-        const b = await a.json();
-        // console.log(b);
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);
         if (flag) {
-          setResponse((prev) => ({ ...prev, data: b.results }));
+          setResponseState((prev) => ({ ...prev, data: data.results }));
         }
       } catch (err) {
-        setResponse((prev) => ({ ...prev, error: true }));
+        setResponseState((prev) => ({ ...prev, error: true }));
       } finally {
-        setResponse((prev) => ({ ...prev, isLoading: false }));
+        setResponseState((prev) => ({ ...prev, isLoading: false }));
       }
     };
     getUser();
@@ -36,8 +31,12 @@ const useUserList = (url = "https://randomuser.me/api/?results=15") => {
       flag = false;
     };
   }, [url]);
-
-  return [response.data, response.isLoading, response.error];
+  // До этой части
+  return [
+    responseState.data,
+    responseState.isLoading,
+    responseState.error,
+  ] as const;
 };
 
-export default useUserList;
+export default useFetchUsers;

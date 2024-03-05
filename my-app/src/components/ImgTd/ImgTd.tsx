@@ -1,10 +1,10 @@
 import { useRef, memo } from "react";
 import classes from "./ImgTd.module.css";
 
-interface ImgTdProps {
+type ImgTdProps = {
   thumbnail: string;
   pictureLarge: string;
-}
+};
 
 // we use memo to avoid rerenders
 const ImgTd = memo(({ thumbnail, pictureLarge }: ImgTdProps) => {

@@ -3,7 +3,11 @@ import ResetButton from "../ResetButton/ResetButton";
 import SearchInput from "../SearchInput/SearchInput";
 import classes from "./SearchTools.module.css";
 
-const SearchTools = memo(({ setSearchParams }: any) => {
+type searchToolsProps = {
+  setSearchParams: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const SearchTools = memo(({ setSearchParams }: searchToolsProps) => {
   console.log("render searchTools");
 
   const ref = useRef<HTMLInputElement>(null);
