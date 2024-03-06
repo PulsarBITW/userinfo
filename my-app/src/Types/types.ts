@@ -15,7 +15,7 @@ type info = {
   seed: string;
   version: string;
 };
-// Добить типизацию мб
+
 export interface resultUser {
   genger: string;
   name: nameType;
@@ -36,8 +36,8 @@ export interface resultRequest {
   results: resultUser[];
 }
 
-export interface responseProps {
-  data: resultUser[];
-  error: boolean;
-  isLoading: boolean;
-}
+// export interface responseProps {
+//   data: resultUser[];
+//   error: boolean;
+//   isLoading: boolean;
+// }

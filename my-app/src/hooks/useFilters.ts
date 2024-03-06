@@ -2,35 +2,29 @@ import { useEffect, useState } from "react";
 import { resultUser } from "../Types/types";
 import filterFunction from "../utils/filterFunction";
 
-type filterInfo = {
-  filterUsers: resultUser[];
-  notFoundUsers: boolean;
-};
+function useFilters(searchParams: string, userList: resultUser[]) {
+  const [notFoundUsers, setNotFoundUsers] = useState<boolean>(false);
+  const [filterUsers, setFilterUsers] = useState<resultUser[]>(userList);
 
-const useFilters = (searchParams: string, userList: resultUser[]) => {
-  const initialState: filterInfo = {
-    filterUsers: userList,
-    notFoundUsers: false,
-  };
-  const [filterInfo, setFilterInfo] = useState<filterInfo>(initialState);
-
-  // clone userList to filterUsers in first Render and setFilterUsers if searchParams.length equal 0
   useEffect(() => {
-    if (searchParams.length === 0)
-      setFilterInfo({ filterUsers: userList, notFoundUsers: false });
-    else {
+    // If there are no searchParams then add the original array
+    if (searchParams.length === 0) {
+      setFilterUsers(userList);
+      setNotFoundUsers(false);
+    } else {
       const filterArray = userList.filter((el: resultUser) =>
         filterFunction(searchParams, el)
       );
-      if (!filterArray.length)
-        setFilterInfo((prev) => ({ ...prev, notFoundUsers: true }));
+      // If there are no suitable users, then we set an error, otherwise we set a filtered array
+      if (!filterArray.length) setNotFoundUsers(true);
       else {
-        setFilterInfo({ filterUsers: filterArray, notFoundUsers: false });
+        setFilterUsers(filterArray);
+        setNotFoundUsers(false);
       }
     }
   }, [searchParams, userList]);
 
-  return [filterInfo.filterUsers, filterInfo.notFoundUsers] as const;
-};
+  return [filterUsers, notFoundUsers] as const;
+}
 
 export default useFilters;

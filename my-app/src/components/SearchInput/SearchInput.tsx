@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, forwardRef } from "react";
 import useDebounce from "../../hooks/useDebounce";
+
 import classes from "./SearchInput.module.css";
 
 type SearchInputProps = {
@@ -17,7 +18,7 @@ const SerchInput = forwardRef<HTMLInputElement, SearchInputProps>(
     return (
       <input
         className={classes.searchInput}
-        ref={ref} // react guarantees ref stability between renders so you don’t have to use the memo
+        ref={ref}
         onChange={onChange}
         placeholder="something"
       />

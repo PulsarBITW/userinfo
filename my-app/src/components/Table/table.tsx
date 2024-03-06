@@ -1,16 +1,14 @@
-import ImgTd from "../ImgTd/ImgTd";
-import classes from "./table.module.css";
 import { memo } from "react";
-
 import { resultUser } from "../../Types/types";
+import ImgTd from "../ImgTd/ImgTd";
+
+import classes from "./table.module.css";
 
 type tableProps = {
   users: resultUser[];
 };
 
 const Table = memo(({ users }: tableProps) => {
-  console.log("render table");
-
   return (
     <table className={classes.table}>
       <thead>

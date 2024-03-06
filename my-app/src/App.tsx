@@ -1,17 +1,14 @@
 import { useState } from "react";
 
-import "./App.css";
-
 import useFetchUsers from "./hooks/useFetchUsers";
 import useFilters from "./hooks/useFilters";
+
 import Table from "./components/Table/table";
 import SearchTools from "./components/SearchTools/SearchTools";
 import Spinner from "./components/Spinner/Spinner";
 import NotFound from "./components/NotFound/NotFound";
 
-// Улучшить поиск по строке
-// типизация useFetchUsers и useDebounce
-// мб добить типы для объекта юзера
+import "./App.css";
 
 // we can use a ReactContext to avoid props drilling in SearchTools->SearchInput, but it only occurs once
 //  we can create a separate component for <main/> to avoid rerenders in App, but App is <main/> in this task

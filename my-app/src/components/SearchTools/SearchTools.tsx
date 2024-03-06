@@ -8,8 +8,6 @@ type searchToolsProps = {
 };
 
 const SearchTools = memo(({ setSearchParams }: searchToolsProps) => {
-  console.log("render searchTools");
-
   const ref = useRef<HTMLInputElement>(null);
 
   const reset = () => {
