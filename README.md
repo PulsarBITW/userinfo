@@ -1,10 +1,40 @@
-# Getting Started with Create React App
+# Тестовое задание
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Данный проект является таблицей пользователей, фильтрацию которых мы реализуем с помощью инпута, а так же используем кнопку "Reset" для сброса фильтров.
+
+Во время получения данных отображается Spinner.
+
+Если нет подходящих пользователей по заданным фильтрам - отображается сообщение об их отсутствии.
+
+ссылка на GitHub Pages-
+
+## Фильтрация пользователей
+
+**Реализована с помощью 3х проверок:**
+
+1. Текст с инпута сопоставляется со строкой firstName + lastName
+2. Текст с инпута сопоставляется со строкой firstName
+3. Текст с инпута сопоставляется со строкой lastName
+
+Тем самым, если вводить первым lastName, то мы всеровно получим нужного пользователя
+
+_src/utils/filterFunction.ts - файл отвечающий за логику сортировки_
+
+## Стек
+
+1. HTML
+2. CSS
+3. JavaScript/TypeScript
+4. React
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm deploy` 
+
+выполняет npm run build и выполняет загрузку проекта на GitHub Pages на url равный homepage 
+package.json ---> "homepage": url 
 
 ### `npm start`
 
@@ -39,8 +69,4 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
