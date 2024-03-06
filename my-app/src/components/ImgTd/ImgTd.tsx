@@ -9,8 +9,6 @@ type ImgTdProps = {
 
 // we use memo to avoid rerenders
 const ImgTd = memo(({ thumbnail, pictureLarge }: ImgTdProps) => {
-  console.log("render imgTd");
-
   const ref = useRef<HTMLSpanElement>(null);
 
   const handleMouseOver: React.MouseEventHandler<HTMLImageElement> = () => {
