@@ -16,9 +16,9 @@
 2. Текст с инпута сопоставляется со строкой firstName
 3. Текст с инпута сопоставляется со строкой lastName
 
-Тем самым, если вводить первым lastName, то мы всеровно получим нужного пользователя
+Тем самым, если вводить первым lastName, то всеровно получим пользователя (при наличии пользователя с такой фамилией)
 
-_src/utils/filterFunction.ts - файл отвечающий за логику сортировки_
+_src/utils/filterFunction.ts - файл отвечающий за логику сопоставления строки инпута с firstName,lastName пользователей_
 
 ## Стек
 
@@ -34,7 +34,8 @@ In the project directory, you can run:
 ### `npm deploy` 
 
 выполняет npm run build и выполняет загрузку проекта на GitHub Pages на url равный homepage 
-package.json ---> "homepage": url 
+
+(package.json ---> "homepage": url) 
 
 ### `npm start`
 
