@@ -10,8 +10,8 @@ import NotFound from "./components/NotFound/NotFound";
 
 import "./App.css";
 
-// we can use a ReactContext to avoid props drilling in SearchTools->SearchInput, but it only occurs once
-//  we can create a separate component for <main/> to avoid rerenders in App, but App is <main/> in this task
+// we can use a ReactContext to avoid props drilling in SearchTools->SearchInput, but it only occurs once.
+//  we can create a separate component for <main/> to avoid rerenders in App, but App is <main/> in this task.
 const App = () => {
   const [userList, isLoading, error] = useFetchUsers();
   const [searchParams, setSearchParams] = useState<string>("");
