@@ -7,7 +7,7 @@ type ImgTdProps = {
   pictureLarge: string;
 };
 
-// we use memo to avoid rerenders
+// we use memo to avoid extra rerenders.
 const ImgTd = memo(({ thumbnail, pictureLarge }: ImgTdProps) => {
   const ref = useRef<HTMLSpanElement>(null);
 
